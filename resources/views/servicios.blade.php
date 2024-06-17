@@ -1,16 +1,36 @@
-@extends('layout')  
+@extends('layout')
 
-@section('title','Servicio')
+@section('title', 'Servicios')
 
 @section('content')
     <h2>Servicios</h2>
-    <ul>
-    @if($servicios)
-        @foreach($servicios as $item) 
-        <li>{{ $item['titulo'] }}</li>
-        @endforeach
+    
+    @if($servicios->count())
+        <table>
+            <thead>
+                <tr>
+                    <th>Título</th>
+                    <th>Descripción</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($servicios as $servicio)
+                    <tr>
+                        <td>
+                            <a href="{{ route('servicios.show', $servicio) }}">
+                                {{ $servicio->titulo }}
+                            </a>
+                        </td>
+                        <td>{{ $servicio->descripcion }}</td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+        <div class="pagination">
+            {{ $servicios->links() }}
+        </div>
     @else
-    <li>No Existe ningun servicio que mostrar </li>
+        <p>No hay servicios disponibles</p>
     @endif
-    </ul>
+
 @endsection

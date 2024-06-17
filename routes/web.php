@@ -6,7 +6,9 @@ use App\Http\Controllers\Servicios2Controller; // Agrega este use statement
 
 Route::view('/','home')->name('home');
 Route::view('nosotros','nosotros')->name('nosotros');
-//Route::get('servicios',[Servicios2Controller::class, 'index'])->name('servicios'); // Corrige la ruta utilizando el alias de clase
+Route::get('servicios', [ServiciosController::class, 'index'])->name('servicios.index');
+Route::get('servicios/{servicio}', [ServiciosController::class, 'show'])->name('servicios.show');
+
 Route::view('contacto','contacto')->name('contacto');
 
-Route::resource('servicios', Servicios2Controller::class);
+Route::resource('servicios', ServiciosController::class);

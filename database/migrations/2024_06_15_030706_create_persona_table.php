@@ -25,7 +25,9 @@ return new class extends Migration
             $table->char('cPerEstado',1);
             $table->string('remenber_toker',100)->nullable();
             $table->timestamp('created_at')->nullable();
-            $table->timestamp('updated_at')->nullable();});
+            $table->timestamp('updated_at')->nullable();
+
+        });
     }
 
     /**
