@@ -12,11 +12,11 @@
     @csrf
     <tr>
     <th>Titulo</th>
-    <td><input type="text" name="titulo"></td>
+    <td><input type="text" name="titulo"><br>{{ $errors->first('titulo') }}</td>
     </tr>
     <tr>
     <th>Descripcion</th>
-    <td><input type="text" name="descripcion"></td>
+    <td><input type="text" name="descripcion"><br>{{ $errors->first('descripcion') }}</td>
     </tr>
     <tr>
     <td colspan="2" align="center"><button>Guardar</button></td>
