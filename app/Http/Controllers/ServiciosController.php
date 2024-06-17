@@ -16,13 +16,39 @@ class ServiciosController extends Controller
     public function index()
     {
      
-      $servicios = Servicio::latest('titulo')->paginate();
+      $servicios = Servicio::latest('titulo')->paginate(2);
       
       return view('servicios',compact('servicios'));
     }
 
     public function show($id) {
-      return Servicio::find($id);
+       return view('show',[
+      'servicio' => Servicio::find($id)
+      ]);
+      //return Servicio::find($id);
       //return $id;
       }
+    
+    public function create(){ 
+      return view('create');
+      }
+
+      public function store(Request $request)
+    {
+        // Validar los datos del formulario
+        $validatedData = $request->validate([
+            'titulo' => 'required|string|max:255',
+            'descripcion' => 'required|string|max:1000',
+        ]);
+
+        // Crear el nuevo servicio
+        Servicio::create([
+            'titulo' => $validatedData['titulo'],
+            'descripcion' => $validatedData['descripcion'],
+        ]);
+
+       // Redirigir a una página de éxito o de lista de servicios
+       return redirect()->route('servicios.index')->with('success', 'Servicio creado exitosamente.');
+      }
+        
 }

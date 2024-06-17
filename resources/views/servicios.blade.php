@@ -3,34 +3,44 @@
 @section('title', 'Servicios')
 
 @section('content')
-    <h2>Servicios</h2>
-    
-    @if($servicios->count())
-        <table>
-            <thead>
-                <tr>
-                    <th>Título</th>
-                    <th>Descripción</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($servicios as $servicio)
-                    <tr>
-                        <td>
-                            <a href="{{ route('servicios.show', $servicio) }}">
-                                {{ $servicio->titulo }}
-                            </a>
-                        </td>
-                        <td>{{ $servicio->descripcion }}</td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-        <div class="pagination">
-            {{ $servicios->links() }}
-        </div>
+<tr>
+    <td colspan="4">
+        <a href="{{ route('servicios.create') }}"><strong>Nuevo Servicio</strong></a><br>
+    </td>
+</tr>
+@if($errors->any())
+    <ul>
+        @foreach($errors->all() as $error)
+            <li>{{ $errors }}</li>
+        @endforeach
+    </ul>
+@endif
+<tr>
+    <th colspan="4">Listado de Servicio</th>
+</tr>
+<table>
+    <tr>
+
+    @if($servicios)
+        @foreach($servicios as $servicio)
+        <tr>
+            <td colspan="4">
+            <a href="{{ route('servicios.show',$servicio) }}">{{ $servicio->titulo }}</a>
+            </td>
+        </tr>
+        @endforeach
     @else
-        <p>No hay servicios disponibles</p>
+        <td colspan="4">No hay servicios que mostrar</td>
     @endif
+    </tr>
+</table>
+
+<tr>
+    <td colspan="4">
+        <div class="pagination-wrapper">
+            {{ $servicios->links('vendor.pagination.bootstrap-4') }}
+        </div>
+    </td>
+</tr>
 
 @endsection
