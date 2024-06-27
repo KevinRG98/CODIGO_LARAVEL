@@ -30,9 +30,10 @@ class ServiciosController extends Controller
       //return $id;
       }
     
-    public function create(){ 
-      return view('create');
-      }
+    public function create(){
+      return view('create',[
+      'servicio' => new Servicio]);
+    } 
 
       public function store(Request $request)
     {
@@ -51,5 +52,23 @@ class ServiciosController extends Controller
        // Redirigir a una página de éxito o de lista de servicios
        return redirect()->route('servicios.index')->with('success', 'Servicio creado exitosamente.');
       }
-        
+
+
+      public function edit (Servicio $id){
+        return view('edit', [
+        'servicio' => $id
+        ]);
+        }   
+
+        public function update (Servicio $id) {
+          $id->update([
+          'titulo' => request('titulo'),
+          'descripcion' => request('descripcion')
+          ]);
+          return redirect()->route('servicios.show',$id);
+          }
+      
+          public function destroy (Servicio $servicio){ $servicio->delete();
+            return redirect()->route('servicios.index');}
+          
 }
