@@ -76,6 +76,6 @@
 <div class="{{ setActivo ('home') }}"><a href="/">Home</a></div>
 <div class="{{ setActivo('nosotros') }}"><a href="nosotros">Nosotros</a></div>
 <div class="{{ setActivo('servicios') }}"><a href="servicios">Servicios</a></div>
-<div class="{{ setActivo('contacto') }}"><a href="contacto">Contacto</a></div>
+<div class="{{ setActivo('contactos') }}"><a href="contactos">Contactos</a></div>
 </div>
 </body>

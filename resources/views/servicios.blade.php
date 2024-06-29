@@ -3,44 +3,56 @@
 @section('title', 'Servicios')
 
 @section('content')
-<tr>
-    <td colspan="4">
-        <a href="{{ route('servicios.create') }}"><strong>Nuevo Servicio</strong></a><br>
-    </td>
-</tr>
-@if($errors->any())
-    <ul>
-        @foreach($errors->all() as $error)
-            <li>{{ $errors }}</li>
-        @endforeach
-    </ul>
-@endif
-<tr>
-    <th colspan="4">Listado de Servicio</th>
-</tr>
-<table>
-    <tr>
 
-    @if($servicios)
-        @foreach($servicios as $servicio)
-        <tr>
-            <td colspan="4">
-            <a href="{{ route('servicios.show',$servicio) }}">{{ $servicio->titulo }}</a>
-            </td>
-        </tr>
-        @endforeach
-    @else
-        <td colspan="4">No hay servicios que mostrar</td>
-    @endif
-    </tr>
-</table>
+<div class="container my-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1>Listado de Servicios</h1>
+        <a href="{{ route('servicios.create') }}" class="btn btn-primary"><strong>Nuevo Servicio</strong></a>
+    </div>
 
-<tr>
-    <td colspan="4">
-        <div class="pagination-wrapper">
-            {{ $servicios->links('vendor.pagination.bootstrap-4') }}
+    @if($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
         </div>
-    </td>
-</tr>
+    @endif
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Título</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if($servicios->count())
+                @foreach($servicios as $servicio)
+                    <tr>
+                        <td>
+                            <a href="{{ route('servicios.show', $servicio) }}">{{ $servicio->titulo }}</a>
+                        </td>
+                    </tr>
+                @endforeach
+            @else
+                <tr>
+                    <td colspan="4" class="text-center">No hay servicios que mostrar</td>
+                </tr>
+            @endif
+        </tbody>
+    </table>
+
+    <div class="d-flex justify-content-center">
+        {{ $servicios->links('vendor.pagination.bootstrap-4') }}
+    </div>
+</div>
 
 @endsection
+
+
+
+
+
+
+
